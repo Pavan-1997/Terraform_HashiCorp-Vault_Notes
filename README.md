@@ -162,7 +162,7 @@ terraform apply
 
 ![OP](https://github.com/Pavan-1997/Terraform_HashiCorp-Vault_Notes/assets/32020205/3aa186e1-f22c-4530-9f6d-8ec0a8cf0ee6)
 
-Similarly, you can integrate with any AWS Resource to the Vault
+Similarly, you can integrate with any AWS Resource to the HashiCorp Vault
 
 
 
