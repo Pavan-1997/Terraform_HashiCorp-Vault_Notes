@@ -14,48 +14,54 @@ To create an AWS EC2 instance with Ubuntu, you can use the AWS Management Consol
 - Click on the Launch button.
 
 
-Install Vault on the EC2 instance (Ubuntu)
-
 1. Install gpg
-
+```
 sudo apt update && sudo apt install gpg
+```
 
 
 2. Download the signing key to a new keyring
-
+```
 wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+```
 
 
 3. Verify the key's fingerprint
-
+```
 gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint
+```
 
 
 4. Add the HashiCorp repo
-
+```
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+```
 
 
 5. Update the repo
-
+```
 sudo apt update
+```
 
 
 6. Install Vault
-
+```
 sudo apt install vault
+```
 
 
 7. To start Vault, you can use the following command:
-
+```
 vault server -dev -dev-listen-address="0.0.0.0:8200"
+```
 
 
 8. Open another terminal
 
 Execute the below commands from the first terminal output
-
+```
 export VAULT_ADDR='http://0.0.0.0:8200'
+```
 
 
 9. Now access the Vault using IP:8200 make sure you open the Security Group Inbound rule for the port 8200
@@ -88,7 +94,7 @@ Now go to Access -> Authentication Methods -> Enable new method -> Select Generi
 
 
 12. Creating Roles using the CLI as UI is not supported, execute the below on second terminal opened
-
+```
 vault policy write terraform - <<EOF
 path "*" {
   capabilities = ["list", "read"]
@@ -110,25 +116,29 @@ path "secret/data/*" {
 path "auth/token/create" {
 capabilities = ["create", "read", "update", "list"]
 }
-EOF 
+EOF
+```
 
 
 13. Create a AppRole 
-
+```
 vault write auth/approle/role/terraform \
     secret_id_ttl=10m \
     token_num_uses=10 \
     token_ttl=20m \
     token_max_ttl=30m \
     secret_id_num_uses=40 \
-    token_policies=terraform
-	
-	
+    token_policies=terraform 
+```	
+
+ 
 14. Generate Role ID similar to AWS Access Key and Secret ID similar to AWS Secret Key, You can retrieve the Role ID using the Vault CLI
-
+```
 vault read auth/approle/role/terraform/role-id
-
+```
+```
 vault write -f auth/approle/role/terraform/secret-id
+```
 
 
 15. Start Terraform main.tf
@@ -137,16 +147,17 @@ Replace the values accordingly
 
 
 16. Use the below Terraform commands
-
+```
 terraform init
-
+```
+```
 terraform apply 
-
-If facing error then restart the Vault server and then follow Step 7 again and update the vaulues in main.tf file
+```
+`If facing an error then restart the Vault server and then follow Step 7 again and update the vaulues in main.tf file`
 
 17. Now you can see a new EC2 instance created with Tag as Secret value retrieved from Hashicorp Vault
 
-Similarly you can interagarte with any AWS Resource to the Vault
+Similarly, you can integrate with any AWS Resource to the Vault
 
 
 
