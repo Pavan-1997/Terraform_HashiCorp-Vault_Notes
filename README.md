@@ -136,9 +136,12 @@ vault write auth/approle/role/terraform \
 ```
 vault read auth/approle/role/terraform/role-id
 ```
+![role-id](https://github.com/Pavan-1997/Terraform_HashiCorp-Vault_Notes/assets/32020205/598b7695-a5b0-4873-85d5-7400e029f15e)
+
 ```
 vault write -f auth/approle/role/terraform/secret-id
 ```
+![secret-id](https://github.com/Pavan-1997/Terraform_HashiCorp-Vault_Notes/assets/32020205/488c0498-49a0-45f5-9ce8-e58e5c8c9ccf)
 
 
 15. Start Terraform main.tf
@@ -156,6 +159,8 @@ terraform apply
 `If facing an error then restart the Vault server and then follow Step 7 again and update the vaulues in main.tf file`
 
 17. Now you can see a new EC2 instance created with Tag as Secret value retrieved from Hashicorp Vault
+
+![OP](https://github.com/Pavan-1997/Terraform_HashiCorp-Vault_Notes/assets/32020205/3aa186e1-f22c-4530-9f6d-8ec0a8cf0ee6)
 
 Similarly, you can integrate with any AWS Resource to the Vault
 
