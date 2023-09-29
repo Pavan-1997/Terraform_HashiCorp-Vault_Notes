@@ -4,7 +4,7 @@ Here are the detailed steps for each of these steps:
 
 Create an AWS EC2 instance with Ubuntu and follow the below Steps accordingly
 
- To create an AWS EC2 instance with Ubuntu, you can use the AWS Management Console or the AWS CLI. Here are the steps involved in creating an EC2 instance using the AWS Management Console:
+To create an AWS EC2 instance with Ubuntu, you can use the AWS Management Console or the AWS CLI. Here are the steps involved in creating an EC2 instance using the AWS Management Console:
 
 - Go to the AWS Management Console and navigate to the EC2 service.
 - Click on the Launch Instance button.
